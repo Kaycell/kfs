@@ -13,6 +13,10 @@ ASM	= $(SRCDIR)/crt0.S
 
 OBJS	= $(SRC:.c=.o) $(ASM:.S=.o)
 
+QEMU	= qemu-system-x86_64
+
+GDB	= gdb
+
 all:	$(TARGET)
 
 $(TARGET):	$(OBJS)
@@ -30,6 +34,9 @@ clean:
 fclean:	clean
 	$(RM) $(TARGET)
 
-boot:
+boot:	$(TARGET)
+	$(QEMU) -kernel $(TARGET)
 
-debug:
+debug:	$(TARGET)
+	$(QEMU) -s -S -daemonize -kernel $(TARGET)	
+	$(GDB) $(TARGET) -ex "target remote localhost:1234"
