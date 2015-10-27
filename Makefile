@@ -11,7 +11,7 @@ LDFLAGS	+= -T kfs.ld -nostdlib -m32 -Wl,--build-id=none
 
 SRCDIR	= src
 
-SRC	= $(SRCDIR)/main.c
+SRC	= $(SRCDIR)/main.c $(SRCDIR)/vga.c $(SRCDIR)/serial.c $(SRCDIR)/printk.c
 
 ASM	= $(SRCDIR)/crt0.S
 
