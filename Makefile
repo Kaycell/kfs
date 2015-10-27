@@ -1,5 +1,9 @@
 TARGET	= kfs
 
+NASM	= nasm
+
+NFLAGS	= -f elf32
+
 CFLAGS	+= -nostdinc -fno-builtin -m32
 CFLAGS	+= -fno-stack-protector
 
@@ -26,13 +30,15 @@ $(TARGET):	$(OBJS)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 %.o: %.S
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(NASM) $(NFLAGS) $< -o $@
 
 clean:
 	$(RM) $(OBJS)
 
 fclean:	clean
 	$(RM) $(TARGET)
+
+re:	fclean all
 
 boot:	$(TARGET)
 	$(QEMU) -kernel $(TARGET)
