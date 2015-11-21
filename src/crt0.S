@@ -10,6 +10,8 @@ section .multiboot
 global _start
 global inb
 global outb
+global gdt_reload
+extern gp
 extern main
 
 _start:
@@ -28,3 +30,15 @@ outb:
 	mov   al, [esp + 4 + 4]  
 	out   dx, al  
 	ret
+
+gdt_reload:
+    lgdt [gp]
+    mov ax, 0x10      ; 0x10 is the offset in the GDT to our data segment
+    mov ds, ax
+    mov es, ax
+    mov fs, ax
+    mov gs, ax
+    mov ss, ax
+    jmp 0x08:flush2   ; 0x08 is the offset to our code segment
+flush2:
+    ret

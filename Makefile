@@ -5,13 +5,17 @@ NASM	= nasm
 NFLAGS	= -f elf32
 
 CFLAGS	+= -nostdinc -fno-builtin -m32
-CFLAGS	+= -fno-stack-protector
+CFLAGS	+= -fno-stack-protector -Iinc
 
 LDFLAGS	+= -T kfs.ld -nostdlib -m32 -Wl,--build-id=none
 
 SRCDIR	= src
 
-SRC	= $(SRCDIR)/main.c $(SRCDIR)/vga.c $(SRCDIR)/serial.c $(SRCDIR)/printk.c
+SRC	= $(SRCDIR)/main.c \
+	  $(SRCDIR)/vga.c \
+	  $(SRCDIR)/serial.c \
+	  $(SRCDIR)/printk.c \
+	  $(SRCDIR)/segmentation.c
 
 ASM	= $(SRCDIR)/crt0.S
 
