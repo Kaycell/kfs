@@ -11,6 +11,8 @@ global _start
 global inb
 global outb
 global gdt_reload
+global interrupts_load
+extern idtp
 extern gp
 extern main
 
@@ -41,4 +43,8 @@ gdt_reload:
     mov ss, ax
     jmp 0x08:flush2   ; 0x08 is the offset to our code segment
 flush2:
+    ret
+
+interrupts_load:
+    lidt [idtp]
     ret

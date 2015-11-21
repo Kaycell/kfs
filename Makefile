@@ -12,12 +12,15 @@ LDFLAGS	+= -T kfs.ld -nostdlib -m32 -Wl,--build-id=none
 SRCDIR	= src
 
 SRC	= $(SRCDIR)/main.c \
+	  $(SRCDIR)/memset.c \
 	  $(SRCDIR)/vga.c \
 	  $(SRCDIR)/serial.c \
 	  $(SRCDIR)/printk.c \
-	  $(SRCDIR)/segmentation.c
+	  $(SRCDIR)/segmentation.c \
+	  $(SRCDIR)/interrupts.c
 
-ASM	= $(SRCDIR)/crt0.S
+ASM	= $(SRCDIR)/crt0.S \
+	  $(SRCDIR)/isr.S
 
 OBJS	= $(SRC:.c=.o) $(ASM:.S=.o)
 

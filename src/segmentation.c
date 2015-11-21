@@ -2,6 +2,7 @@
 
 /*
  * GDT entry
+ * 64 bits struct
  * Packed to avoid compiler optimization
  */
 struct gdt_entry
